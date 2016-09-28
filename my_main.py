@@ -62,9 +62,7 @@ class Processor(object):
                 call_ahead = False
 
                 for party in range(self.callahead.size ):
-                    #print('this is the party range', party)
                     if(col_two)==self.callahead.get(party):
-                        #print(col_two, 'adding to waiting from call')
                         call_ahead = True
                         break
 
@@ -84,7 +82,6 @@ class Processor(object):
                     self.callahead.delete(party)                   
                 else:
                     self.waiting.add(col_two)
-                print(line, line_i)
                 my_buzzer = self.buzzers.pop()
                 if my_buzzer == IndexError:
                     w.writerow([my_buzzer])
@@ -96,19 +93,15 @@ class Processor(object):
                 else:
                     w.writerow([self.waiting.get(0)])
 
-                print('my row', my_row)
                 if my_row != IndexError:
-                    print('my if not eror row', my_row)
                         #delete party from waiting list 
                     self.waiting.delete(0)
-                    print(line, line_i)
                     self.buzzers.push('Buzzer')
 
             if line=="LEAVE":
                 for cust in range(self.waiting.size):
                     if col_two==self.waiting.get(cust):
                         self.waiting.delete(cust)
-                print(line, line_i)
                 self.buzzers.push('Buzzer')
 
     def debug(self, w):
@@ -121,7 +114,7 @@ class Processor(object):
 #######################
 ###   Main loop
 
-with open('data.csv', newline='') as f:
+with open('example_data.csv', newline='') as f:
     processor = Processor()
     csvfile = open('my_output.txt', 'w', newline='')
     w = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ')
